@@ -11,25 +11,37 @@ namespace TaskDemo
     {
         static void Main(string[] args)
         {
-            Task taskA = new Task(DoUnitOfWorkA);
-            //Task taskA = Task.Run(() => DoUnitOfWorkA());
-            Task taskB = new Task(DoUnitOfWorkB);
-            Object data = new List<int>(){1,3,7,9};
-            Task taskC = new Task(DoUnitOfWorkC, data);
+            ////Task taskA = new Task(DoUnitOfWorkA);
+            //Task taskB = new Task(DoUnitOfWorkB);
+            ////taskA.Start();
+            //taskB.Start();
 
-            Task taskCalculate = new Task(Calculate);
-            taskCalculate.Start();
-            taskCalculate.Wait();
-            taskA.Start();
-            taskB.Start();
-            taskC.Start();
-            Task taskAD = taskA.ContinueWith(DoUnitOfWorkD);
-            //taskAD.Start(); 
-            Task.WaitAll(taskA, taskB, taskC, taskAD);
-            Console.WriteLine("Done");
-            Parallel.For(0, 100, Calculate);
-            Console.WriteLine("Done for good");
-            Console.ReadLine();
+
+            //Task taskA = Task.Run(() => DoUnitOfWorkA());
+
+            //Object data = new List<int>() { 1, 3, 7, 9 };
+            //Task taskC = new Task(DoUnitOfWorkC, data);
+            //taskC.Start();
+
+            //Task taskCalculate = new Task(Calculate);
+            //taskCalculate.Start();
+            //taskCalculate.Wait();
+
+
+
+
+            ////Task taskAd = taskA.ContinueWith(DoUnitOfWorkD);
+            //Task taskAd = taskA.ContinueWith(DoUnitOfWorkD, TaskContinuationOptions.OnlyOnRanToCompletion);
+
+            //taskA.Wait();
+            ////taskAd.Start(); 
+
+            //Task.WaitAll(taskA, taskB, taskC, taskAd);
+            //Console.WriteLine("Done");
+
+            //Parallel.For(0, 100, Calculate);
+            //Console.WriteLine("Done for good");
+            //Console.ReadLine();
         }
 
         private static void Calculate(int obj)
@@ -39,7 +51,7 @@ namespace TaskDemo
 
         private static void Calculate()
         {
-            int milliseconds = 2000;
+            int milliseconds = 20;
             Thread.Sleep(milliseconds);
             System.Console.WriteLine("Hi I am in Calculate");
         }
@@ -53,17 +65,22 @@ namespace TaskDemo
         {
             foreach (int tal in (List<int>)data)
             {
+                //Thread.Sleep(20);
                 Console.WriteLine(tal);
             }
         }
 
         private static void DoUnitOfWorkB()
         {
+            int milliseconds = 10;
+            Thread.Sleep(milliseconds);
             System.Console.WriteLine("Hi I am in B");
         }
 
         private static void DoUnitOfWorkA()
         {
+            int milliseconds = 10;
+            Thread.Sleep(milliseconds);
             System.Console.WriteLine("Hi I am in A");
         }
     }

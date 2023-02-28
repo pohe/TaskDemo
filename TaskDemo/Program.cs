@@ -41,7 +41,7 @@ namespace TaskDemo
 
         private static void Calculate()
         {
-            int milliseconds = 20;
+            int milliseconds = 10;
             Thread.Sleep(milliseconds);
             System.Console.WriteLine("Hi I am in Calculate");
         }
@@ -108,9 +108,9 @@ namespace TaskDemo
 
             #region Example 1
 
-            //Task taskA = new Task(DoUnitOfWorkA);
+            ////Task taskA = new Task(DoUnitOfWorkA);
             //Task taskB = new Task(DoUnitOfWorkB);
-            //taskA.Start();
+            ////taskA.Start();
             //taskB.Start();
 
             //Task taskA = Task.Run(DoUnitOfWorkA);
@@ -128,10 +128,10 @@ namespace TaskDemo
 
             #region Example 3
 
-            //Task taskA = new Task(DoUnitOfWorkA);
-            //taskA.Start();
-            //Task taskAd = taskA.ContinueWith(DoUnitOfWorkD, TaskContinuationOptions.OnlyOnRanToCompletion);
-
+            Task taskAD = new Task(DoUnitOfWorkA);
+            taskAD.ContinueWith(DoUnitOfWorkD, TaskContinuationOptions.OnlyOnRanToCompletion);
+            taskAD.Start();
+            
             #endregion
 
             #region Example 4
@@ -171,7 +171,8 @@ namespace TaskDemo
             //taskA.Start();
             //taskB.Start();
             //taskC.Start();
-            //// ...do some work
+            ////...do some work
+
             //Task.WaitAny(taskA, taskB, taskC);
             //Console.WriteLine("After waitAny");
 
@@ -192,8 +193,8 @@ namespace TaskDemo
 
             #region Example 8
 
-            Parallel.For(0, 100, Calculate);
-            Console.WriteLine("Done for good");
+            //Parallel.For(0, 100, Calculate);
+            //Console.WriteLine("Done for good");
 
             #endregion
 

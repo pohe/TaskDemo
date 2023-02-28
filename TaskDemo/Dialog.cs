@@ -8,6 +8,7 @@ namespace TaskDemo
 {
     public class Dialog
     {
+        
         public static void Open()
         {
             Console.WriteLine("*****************************");
